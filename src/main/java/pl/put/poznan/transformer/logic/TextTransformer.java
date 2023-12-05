@@ -3,16 +3,12 @@ package pl.put.poznan.transformer.logic;
 /**
  * This is just an example to show that the logic should be outside the REST service.
  */
-public class TextTransformer {
+public class TextTransformer implements TextTransform{
 
-    private final String[] transforms;
 
-    public TextTransformer(String[] transforms){
-        this.transforms = transforms;
-    }
+    @Override
+    public String apply(String text){
 
-    public String transform(String text){
-        // of course, normally it would do something based on the transforms
-        return text.toUpperCase();
+        return text;
     }
 }
