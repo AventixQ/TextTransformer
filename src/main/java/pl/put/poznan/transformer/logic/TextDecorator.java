@@ -1,18 +1,19 @@
 package pl.put.poznan.transformer.logic;
 
 /**
- * This text Decorator
+ * TextDecorator
+ *
  */
 public abstract class TextDecorator implements TextTransform {
-    protected TextTransform transform;
+    protected final TextTransform textTransform;
 
     public TextDecorator(TextTransform textTransform) {
-
-        transform = textTransform;
+        this.textTransform = textTransform;
     }
-    protected abstract String operation(String text);
+
+    // metoda do przekazania tekstu do dekorowanego obiektu
     @Override
-    final public String apply(String text) {
-        return textTransform.apply(operation(text));
+    public String apply(String text) {
+        return textTransform.apply(text);
     }
 }
