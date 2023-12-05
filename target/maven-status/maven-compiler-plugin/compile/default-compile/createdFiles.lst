@@ -3,4 +3,5 @@ pl\put\poznan\transformer\logic\TextTransform.class
 pl\put\poznan\transformer\logic\Uppercase.class
 pl\put\poznan\transformer\app\TextTransformerApplication.class
 pl\put\poznan\transformer\rest\TextTransformerController.class
+pl\put\poznan\transformer\logic\Lowercase.class
 pl\put\poznan\transformer\logic\TextTransformer.class

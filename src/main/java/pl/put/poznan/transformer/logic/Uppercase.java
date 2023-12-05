@@ -6,9 +6,10 @@ public class Uppercase extends TextDecorator{
         super(textTransform);
     }
 
+    @Override
     public String apply(String text)
     {
-        String transformedText = textTransform.apply(text);
+        String transformedText = super.apply(text);
         return transformedText.toUpperCase();
     }
 }
