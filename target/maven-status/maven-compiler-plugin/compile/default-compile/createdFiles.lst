@@ -1,4 +1,5 @@
 pl\put\poznan\transformer\logic\TextDecorator.class
+pl\put\poznan\transformer\logic\Capitalize.class
 pl\put\poznan\transformer\logic\TextTransform.class
 pl\put\poznan\transformer\logic\Uppercase.class
 pl\put\poznan\transformer\app\TextTransformerApplication.class
