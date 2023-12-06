@@ -5,6 +5,8 @@ import pl.put.poznan.transformer.logic.TextTransform;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This is class for creating abbreviations in text.
@@ -29,14 +31,19 @@ public class TextAbbreviationDecorator extends TextDecorator {
 
     @Override
     public String apply(String text) {
-        String lowerCaseText = text.toLowerCase();
 
         for (Map.Entry<String, String> entry : ABBREVIATIONS_MAP.entrySet()) {
-            String wordToReplace = entry.getKey().toLowerCase();
+            String wordToReplace = entry.getKey();
             String abbreviation = entry.getValue();
-            lowerCaseText = lowerCaseText.replaceAll("\\b" + wordToReplace + "\\b", abbreviation);
+
+            // Use regular expression with Pattern.CASE_INSENSITIVE flag
+            Pattern pattern = Pattern.compile("\\b" + Pattern.quote(wordToReplace) + "\\b", Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(text);
+
+            // Perform case-insensitive replacement
+            text = matcher.replaceAll(abbreviation);
         }
 
-        return super.apply(lowerCaseText);
+        return super.apply(text);
     }
 }

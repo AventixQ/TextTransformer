@@ -17,8 +17,37 @@ public class TextRepetitionDecorator extends TextDecorator {
 
     @Override
     public String apply(String text) {
-        //TODO zrobic usuwanie powtórzeń
+        // Split the text into an array of lines
+        String[] lines = text.split("\\n");
 
-        return super.apply(text);
+        // Process each line separately and store the results
+        StringBuilder resultBuilder = new StringBuilder();
+        for (String line : lines) {
+            // Split the line into words
+            String[] words = line.split("\\s+");
+
+            // Iterate through the words and remove consecutive repetitions
+            StringBuilder lineResultBuilder = new StringBuilder();
+            String previousWord = null;
+            for (String currentWord : words) {
+                // Ignore leading or trailing spaces
+                if (!currentWord.trim().isEmpty()) {
+                    // Remove repetitions
+                    if (!currentWord.equalsIgnoreCase(previousWord)) {
+                        lineResultBuilder.append(currentWord).append(" ");
+                    }
+                    previousWord = currentWord;
+                }
+            }
+
+            // Trim leading and trailing spaces for the line
+            String lineResult = lineResultBuilder.toString().trim();
+
+            // Append the processed line to the result
+            resultBuilder.append(lineResult).append("\n");
+        }
+
+        // Trim the trailing newline and apply transformations from the underlying decorator
+        return super.apply(resultBuilder.toString().trim());
     }
 }
