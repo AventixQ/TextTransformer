@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This is class for creating abbreviations in text.
+ * This is class for expanding abbreviations in text.
  */
 
-public class TextAbbreviationDecorator extends TextDecorator {
-    public TextAbbreviationDecorator(TextTransform textTransform) { super(textTransform); }
+public class TextExpandAbbreviationDecorator extends TextDecorator {
+    public TextExpandAbbreviationDecorator(TextTransform textTransform) { super(textTransform); }
 
     private static final Map<String, String> EXPAND_MAP = new HashMap<>();
 
@@ -24,8 +24,10 @@ public class TextAbbreviationDecorator extends TextDecorator {
     }
 
     /**
+     * Function is taking abbreviations from client and expanding it.\
+     * function will prevent size of letters in input, while expended
      * @param text - text obtained from client
-     * @return formatted text with abbreviations
+     * @return formatted text with expended abbreviations
      */
 
     @Override
