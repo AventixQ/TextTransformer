@@ -31,7 +31,7 @@ public class TextExpandAbbreviationDecorator extends TextDecorator {
      */
 
     @Override
-    public String apply(String text) {
+    public String apply(String word) {
         String lowerCaseText = word.toLowerCase();
         String result = EXPAND_MAP.get(lowerCaseText);
         String result_tab[] = result.split(" ");
