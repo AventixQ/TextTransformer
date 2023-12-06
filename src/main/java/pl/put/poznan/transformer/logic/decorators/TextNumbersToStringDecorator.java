@@ -32,6 +32,30 @@ public class TextNumbersToStringDecorator extends TextDecorator {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Function to convert given @number into merged text with spaces
+     * @param number - number from given text converted into integer
+     * @return formatted number to string polish words with spaces
+     */
+
+    private static String convertNumberToWords(int number) {
+        int len = Integer.toString(number).length();
+        StringBuilder transformedText = new StringBuilder();
+        while (len > 0) {
+            len--;
+            int power = (int) Math.pow(10, len);
+            int toText = number / power;
+
+            if (toText != 0) {
+                String numberInWords = NUMBERS_MAP.get(toText * power);
+                transformedText.append(numberInWords).append(" ");
+                number = number % power;
+            }
+        }
+        return transformedText.toString().trim();
+    }
+
     /**
      * @param text - text obtained from client
      * @return formatted string from given text with number
@@ -44,27 +68,32 @@ public class TextNumbersToStringDecorator extends TextDecorator {
 
         for (String word : words) {
             try {
-                int len = words.length;
-                int number = Integer.parseInt(word);
-                if (number < 1000){
-                    while (len > 0){
-                        len--;
-                        int toText = number / 10 ^ len;
-                        if(toText != 0) {
-                            String numberInWords = NUMBERS_MAP.get(toText * (10 ^ len));
-                            transformedText.append(numberInWords).append(" ");
-                            number = number % 10 ^ len;
-                        }
+                if(word.contains(",")){
+                    String[] parts = word.split(",");
+                    int len = word.length();
+                    int numberInt = Integer.parseInt(parts[0]);
+                    int numberDec = Integer.parseInt(parts[1]);
+                    if (numberInt <= 1000 && numberDec < 100){
+                        transformedText.append(convertNumberToWords(numberInt) + " i ");
+                        transformedText.append(convertNumberToWords(numberDec) + " setnych ");
+                    }
+                    else{
+                        transformedText.append(word).append(" ");
                     }
                 }
                 else{
-                    transformedText.append(word).append(" ");
+                    int number = Integer.parseInt(word);
+                    if (number < 1000){
+                        transformedText.append(convertNumberToWords(number) + " ");
+                    }
+                    else{
+                        transformedText.append(word).append(" ");
+                    }
                 }
             } catch (NumberFormatException e) {
                 transformedText.append(word).append(" ");
             }
         }
-        //System.out.println(transformedText.toString().trim());
         return super.apply(transformedText.toString().trim());
     }
 }
