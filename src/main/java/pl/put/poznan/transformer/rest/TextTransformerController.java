@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.decorators.TextAbbreviationDecorator;
 import pl.put.poznan.transformer.logic.TextDecorator;
 import pl.put.poznan.transformer.logic.TextTransformer;
+import pl.put.poznan.transformer.logic.decorators.TextInverseDecorator;
 import pl.put.poznan.transformer.logic.decorators.TextRepetitionDecorator;
 
 
@@ -51,7 +52,14 @@ public class TextTransformerController {
         TextDecorator transformer = new TextRepetitionDecorator(new TextTransformer());
         return transformer.apply(transforms);
     }
+    //Dla odwracania
+    @RequestMapping(method = RequestMethod.POST, path ="/inverse" ,produces = "application/json")
+    public String inverse(@RequestBody String transforms) {
 
+
+        TextDecorator transformer = new TextInverseDecorator(new TextTransformer());
+        return transformer.apply(transforms);
+    }
 
 }
 
