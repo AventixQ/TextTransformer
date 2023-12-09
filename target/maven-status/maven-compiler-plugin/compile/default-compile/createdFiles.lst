@@ -1,0 +1,6 @@
+pl/put/poznan/transformer/logic/decorators/TextRepetitionDecorator.class
+pl/put/poznan/transformer/logic/decorators/TextNumbersToStringDecorator.class
+pl/put/poznan/transformer/logic/TextTransform.class
+pl/put/poznan/transformer/logic/decorators/TextExpandAbbreviationDecorator.class
+pl/put/poznan/transformer/logic/decorators/TextAbbreviationDecorator.class
+pl/put/poznan/transformer/logic/TextDecorator.class
