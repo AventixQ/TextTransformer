@@ -31,35 +31,45 @@ public class TextExpandAbbreviationDecorator extends TextDecorator {
      */
 
     @Override
-    public String apply(String word) {
-        String lowerCaseText = word.toLowerCase();
-        String result = EXPAND_MAP.get(lowerCaseText);
-        String result_tab[] = result.split(" ");
-        result = "";
-        if (word.endsWith(".")) {
+    public String apply(String text) {
+        String finalSentence = "";
+        String[] words = text.split(" ");
+        for(String word : words){
+            try{
+                String lowerCaseText = word.toLowerCase();
+                String result = EXPAND_MAP.get(lowerCaseText);
+                String result_tab[] = result.split(" ");
+                result = "";
+                if (word.endsWith(".")) {
 
-            for (int i = 0; i < word.length() - 1; i++) {
-                char currentChar = word.charAt(i);
+                    for (int i = 0; i < word.length() - 1; i++) {
+                        char currentChar = word.charAt(i);
 
-                if (Character.isUpperCase(currentChar)) {
-                    result_tab[i] = result_tab[i].substring(0, 1).toUpperCase() + result_tab[i].substring(1);
+                        if (Character.isUpperCase(currentChar)) {
+                            result_tab[i] = result_tab[i].substring(0, 1).toUpperCase() + result_tab[i].substring(1);
+                        }
+                        result += result_tab[i] + " ";
+                        //if(i < word.length() - 1) result += " ";
+                    }
                 }
-                result += result_tab[i];
-                if(i < word.length() - 2) result += " ";
+                else {
+                    char firstLetter = word.charAt(0);
+                    if (Character.isUpperCase(firstLetter)) {
+                        result_tab[0] = result_tab[0].substring(0, 1).toUpperCase() + result_tab[0].substring(1);
+                        result += result_tab[0];
+
+                    }
+                    else {
+                        result += result_tab[0];
+                    }
+                }
+                finalSentence += result;
+            }
+            catch (Exception e){
+                finalSentence += word + " ";
             }
         }
-        else {
-            char firstLetter = word.charAt(0);
-            if (Character.isUpperCase(firstLetter)) {
-                result_tab[0] = result_tab[0].substring(0, 1).toUpperCase() + result_tab[0].substring(1);
-                result += result_tab[0];
 
-            }
-            else {
-                result += result_tab[0];
-            }
-        }
-
-        return super.apply(result);
+        return super.apply(finalSentence);
     }
 }
