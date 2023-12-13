@@ -7,6 +7,8 @@ import pl.put.poznan.transformer.logic.TextDecorator;
 import pl.put.poznan.transformer.logic.TextTransformer;
 import pl.put.poznan.transformer.logic.decorators.TextInverseDecorator;
 import pl.put.poznan.transformer.logic.decorators.TextRepetitionDecorator;
+import pl.put.poznan.transformer.logic.decorators.TextNumbersToStringDecorator;
+import pl.put.poznan.transformer.logic.decorators.TextExpandAbbreviationDecorator;
 
 
 @RestController
@@ -52,6 +54,25 @@ public class TextTransformerController {
         TextDecorator transformer = new TextRepetitionDecorator(new TextTransformer());
         return transformer.apply(transforms);
     }
+    
+    //Dla zmiany liczb na słowa
+    @RequestMapping(method = RequestMethod.POST, path ="/numberstostring" ,produces = "application/json")
+    public String numberstostring(@RequestBody String transforms) {
+
+
+        TextDecorator transformer = new TextNumbersToStringDecorator(new TextTransformer());
+        return transformer.apply(transforms);
+    }
+
+    //Dla zamiany skrótów na słowa
+    @RequestMapping(method = RequestMethod.POST, path ="/expandabbreviation" ,produces = "application/json")
+    public String expandabbreviation(@RequestBody String transforms) {
+
+
+        TextDecorator transformer = new TextExpandAbbreviationDecorator(new TextTransformer());
+        return transformer.apply(transforms);
+    }
+
     //Dla odwracania
     @RequestMapping(method = RequestMethod.POST, path ="/inverse" ,produces = "application/json")
     public String inverse(@RequestBody String transforms) {
