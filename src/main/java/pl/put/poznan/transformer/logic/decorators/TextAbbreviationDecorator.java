@@ -21,13 +21,19 @@ import org.slf4j.Logger;
  */
 
 public class TextAbbreviationDecorator extends TextDecorator {
-    private static Logger logger = LoggerFactory.getLogger(TextAbbreviationDecorator.class);
+    /**
+     * Logger (SL4J library) for displaying messages on console.
+     */
+    final private static Logger logger = LoggerFactory.getLogger(TextAbbreviationDecorator.class);
     /**
      * TextAbbreviationDecorator constructor
-
      * @param textTransform implements TextTransform to decorate
      */
     public TextAbbreviationDecorator(TextTransform textTransform) { super(textTransform); }
+
+    /**
+     * HashMap with all possible abbreviations to change by apply() method.
+     */
 
     private static final Map<String, String> ABBREVIATIONS_MAP = new HashMap<>();
 
@@ -50,11 +56,9 @@ public class TextAbbreviationDecorator extends TextDecorator {
             String wordToReplace = entry.getKey();
             String abbreviation = entry.getValue();
 
-            // Use regular expression with Pattern.CASE_INSENSITIVE flag
             Pattern pattern = Pattern.compile("\\b" + Pattern.quote(wordToReplace) + "\\b", Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(text);
 
-            // Perform case-insensitive replacement
             text = matcher.replaceAll(abbreviation);
         }
         logger.debug(String.format("text: %s, abbreviated: %s", inputSentence, text));
