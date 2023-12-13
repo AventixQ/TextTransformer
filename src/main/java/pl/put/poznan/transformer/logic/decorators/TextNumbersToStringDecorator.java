@@ -7,13 +7,7 @@ package pl.put.poznan.transformer.logic.decorators;
 
 import pl.put.poznan.transformer.logic.TextDecorator;
 import pl.put.poznan.transformer.logic.TextTransform;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import pl.put.poznan.transformer.logic.decorators.data.NumbersHashMap;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -42,28 +36,6 @@ public class TextNumbersToStringDecorator extends TextDecorator {
      * @param textTransform implements TextTransform to decorate
      */
     public TextNumbersToStringDecorator(TextTransform textTransform) { super(textTransform); }
-    /**
-     * Hash Map to store all possible numbers combination with Polish translation
-     */
-    private static final Map<Integer, String> NUMBERS_MAP = new HashMap<>();
-    /**
-     * *.csv file with combinantion of integer number - Polish translation to implement into Hash Map
-     */
-    private static final String CSV_FILE_PATH = "/data/numbers.csv";
-
-    static {
-        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split("; ");
-                int number = Integer.parseInt(values[0]);
-                String word = values[1];
-                NUMBERS_MAP.put(number, word);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Function to convert given number into merged text with spaces
@@ -74,15 +46,21 @@ public class TextNumbersToStringDecorator extends TextDecorator {
     private static String convertNumberToWords(int number) {
         int len = Integer.toString(number).length();
         StringBuilder transformedText = new StringBuilder();
-        while (len > 0) {
-            len--;
-            int power = (int) Math.pow(10, len);
-            int toText = number / power;
+        if(number <= 20){
+            String numberInWords = NumbersHashMap.NUMBERS_MAP.get(number);
+            transformedText.append(numberInWords).append(" ");
+        }
+        else{
+            while (len > 0) {
+                len--;
+                int power = (int) Math.pow(10, len);
+                int toText = number / power;
 
-            if (toText != 0) {
-                String numberInWords = NUMBERS_MAP.get(toText * power);
-                transformedText.append(numberInWords).append(" ");
-                number = number % power;
+                if (toText != 0) {
+                    String numberInWords = NumbersHashMap.NUMBERS_MAP.get(toText * power);
+                    transformedText.append(numberInWords).append(" ");
+                    number = number % power;
+                }
             }
         }
         return transformedText.toString().trim();
@@ -110,7 +88,8 @@ public class TextNumbersToStringDecorator extends TextDecorator {
                     int len = word.length();
                     int numberInt = Integer.parseInt(parts[0]);
                     int numberDec = Integer.parseInt(parts[1]);
-                    if (numberInt <= 1000 && numberDec < 100){
+                    int numberDecLen = parts[1].length();
+                    if (numberInt <= 1000 && numberDec < 100 && numberDecLen < 3){
                         transformedText.append(convertNumberToWords(numberInt) + " i ");
                         transformedText.append(convertNumberToWords(numberDec) + " setnych ");
                     }
@@ -134,6 +113,6 @@ public class TextNumbersToStringDecorator extends TextDecorator {
         String finalSentence = transformedText.toString().trim();
         logger.debug(String.format("text: %s, converted: %s", text, finalSentence));
         logger.info("Successfully converted!");
-        return super.apply(finalSentence);
+        return super.apply(transformedText.toString().trim());
     }
 }
