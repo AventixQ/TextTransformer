@@ -3,24 +3,25 @@
  * L13-delta
  */
 
-package pl.put.poznan.transformer.logic;
+package pl.put.poznan.transformer.logic.decorators;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import pl.put.poznan.transformer.logic.decorators.TextExpandAbbreviationDecorator;
+import pl.put.poznan.transformer.logic.TextDecorator;
+import pl.put.poznan.transformer.logic.TextTransform;
 
 /**
  * Klasa Uppercase jest dekoratorem, który dodaje funkcjonalność zamiany wszystkich liter tekstu na duże litery.
  * Dziedziczy ona po klasie TextDecorator i implementuje interfejs TextTransform.
  */
-public class Uppercase extends TextDecorator {
-    private static Logger logger = LoggerFactory.getLogger(Uppercase.class);
+public class TextUpperCaseDecorator extends TextDecorator {
+    private static Logger logger = LoggerFactory.getLogger(TextUpperCaseDecorator.class);
     /**
      * Konstruktor klasy Uppercase.
      *
      * @param textTransform Obiekt implementujący interfejs TextTransform, który ma zostać udekorowany.
      */
-    public Uppercase(TextTransform textTransform) {
+    public TextUpperCaseDecorator(TextTransform textTransform) {
         super(textTransform);
     }
 

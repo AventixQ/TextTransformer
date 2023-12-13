@@ -3,24 +3,25 @@
  * L13-delta
  */
 
-package pl.put.poznan.transformer.logic;
+package pl.put.poznan.transformer.logic.decorators;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import pl.put.poznan.transformer.logic.decorators.TextExpandAbbreviationDecorator;
+import pl.put.poznan.transformer.logic.TextDecorator;
+import pl.put.poznan.transformer.logic.TextTransform;
 
 /**
  * Klasa Lowercase jest dekoratorem, który dodaje funkcjonalność zamiany wszystkich liter tekstu na małe litery.
  * Dziedziczy ona po klasie TextDecorator i implementuje interfejs TextTransform.
  */
-public class Lowercase extends TextDecorator {
-    private static Logger logger = LoggerFactory.getLogger(Lowercase.class);
+public class TextLowerCaseDecorator extends TextDecorator {
+    private static Logger logger = LoggerFactory.getLogger(TextLowerCaseDecorator.class);
     /**
      * Konstruktor klasy Lowercase.
      *
      * @param textTransform Obiekt implementujący interfejs TextTransform, który ma zostać udekorowany.
      */
-    public Lowercase(TextTransform textTransform) {
+    public TextLowerCaseDecorator(TextTransform textTransform) {
         super(textTransform);
     }
 

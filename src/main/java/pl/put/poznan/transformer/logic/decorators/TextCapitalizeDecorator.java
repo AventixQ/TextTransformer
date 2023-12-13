@@ -3,24 +3,25 @@
  * L13-delta
  */
 
-package pl.put.poznan.transformer.logic;
+package pl.put.poznan.transformer.logic.decorators;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import pl.put.poznan.transformer.logic.decorators.TextExpandAbbreviationDecorator;
+import pl.put.poznan.transformer.logic.TextDecorator;
+import pl.put.poznan.transformer.logic.TextTransform;
 
 /**
  * Klasa Capitalize jest dekoratorem, który dodaje funkcjonalność zmiany pierwszej litery tekstu na dużą, a resztę na małe litery.
  * Dziedziczy ona po klasie TextDecorator i implementuje interfejs TextTransform.
  */
-public class Capitalize extends TextDecorator {
-    private static Logger logger = LoggerFactory.getLogger(Capitalize.class);
+public class TextCapitalizeDecorator extends TextDecorator {
+    private static Logger logger = LoggerFactory.getLogger(TextCapitalizeDecorator.class);
     /**
      * Konstruktor klasy Capitalize.
      *
      * @param textTransform Obiekt implementujący interfejs TextTransform, który ma zostać udekorowany.
      */
-    public Capitalize(TextTransform textTransform) {
+    public TextCapitalizeDecorator(TextTransform textTransform) {
         super(textTransform);
     }
 
