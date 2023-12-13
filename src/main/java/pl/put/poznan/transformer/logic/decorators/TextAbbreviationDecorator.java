@@ -1,3 +1,8 @@
+/**
+ * 2023-12-13
+ * L13-delta
+ */
+
 package pl.put.poznan.transformer.logic.decorators;
 
 import pl.put.poznan.transformer.logic.TextDecorator;
@@ -13,6 +18,11 @@ import java.util.regex.Pattern;
  */
 
 public class TextAbbreviationDecorator extends TextDecorator {
+    /**
+     * TextAbbreviationDecorator constructor
+
+     * @param textTransform implements TextTransform to decorate
+     */
     public TextAbbreviationDecorator(TextTransform textTransform) { super(textTransform); }
 
     private static final Map<String, String> ABBREVIATIONS_MAP = new HashMap<>();

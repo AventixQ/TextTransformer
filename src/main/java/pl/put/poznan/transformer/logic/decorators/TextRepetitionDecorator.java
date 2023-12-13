@@ -1,3 +1,8 @@
+/**
+ * 2023-12-13
+ * L13-delta
+ */
+
 package pl.put.poznan.transformer.logic.decorators;
 
 import pl.put.poznan.transformer.logic.TextDecorator;
@@ -8,6 +13,11 @@ import pl.put.poznan.transformer.logic.TextTransform;
  */
 
 public class TextRepetitionDecorator extends TextDecorator {
+    /**
+     * TextRepetitionDecorator constructor
+
+     * @param textTransform implements TextTransform to decorate
+     */
     public TextRepetitionDecorator(TextTransform textTransform) { super(textTransform); }
 
     /**

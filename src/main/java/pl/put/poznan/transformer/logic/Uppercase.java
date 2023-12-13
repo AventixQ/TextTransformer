@@ -1,3 +1,8 @@
+/**
+ * 2023-12-13
+ * L13-delta
+ */
+
 package pl.put.poznan.transformer.logic;
 
 /**

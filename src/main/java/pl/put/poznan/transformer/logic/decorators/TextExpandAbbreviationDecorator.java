@@ -1,3 +1,8 @@
+/**
+ * 2023-12-13
+ * L13-delta
+ */
+
 package pl.put.poznan.transformer.logic.decorators;
 
 import pl.put.poznan.transformer.logic.TextDecorator;
@@ -6,16 +11,37 @@ import pl.put.poznan.transformer.logic.TextTransform;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 /**
  * This is class for expanding abbreviations in text.
+
+ * It is extending TextDecorator class and
+ * overrides apply() method to create expanded version of sentence.
+ * It is taking care of size of letters in abbreviations, creating words starting
+ * with given size of letter.
+
+ *
+ * @author L13-delta group
+ * @see TextTransform
+ * @see TextDecorator
  */
 
 public class TextExpandAbbreviationDecorator extends TextDecorator {
+    private static Logger logger = LoggerFactory.getLogger(TextExpandAbbreviationDecorator.class);
+    /**
+     * TextExpandAbbreviationDecorator constructor
+
+     * @param textTransform implements TextTransform to decorate
+     */
     public TextExpandAbbreviationDecorator(TextTransform textTransform) { super(textTransform); }
 
+    /**
+     * HashMap with all possible abbreviations to change by apply() method.
+     */
     private static final Map<String, String> EXPAND_MAP = new HashMap<>();
 
-    //zbiór reguł słów i ich skrótów
     static {
         EXPAND_MAP.put("np.", "na przykład");
         EXPAND_MAP.put("dr", "doktor");
@@ -69,7 +95,8 @@ public class TextExpandAbbreviationDecorator extends TextDecorator {
                 finalSentence += word + " ";
             }
         }
-
+        logger.debug(String.format("text: %s, expanded: %s", text, finalSentence));
+        logger.info("Successfully expanded!");
         return super.apply(finalSentence);
     }
 }
