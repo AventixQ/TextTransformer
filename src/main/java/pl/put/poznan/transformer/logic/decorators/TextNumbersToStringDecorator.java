@@ -1,3 +1,8 @@
+/**
+ * 2023-12-13
+ * L13-delta
+ */
+
 package pl.put.poznan.transformer.logic.decorators;
 
 import pl.put.poznan.transformer.logic.TextDecorator;
@@ -10,13 +15,40 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 /**
  * This is class for changing numbers to sting in text.
+
+ * It is extending TextDecorator class and
+ * overrides apply() method to create sentence with
+ * float numbers converted to Polish words.
+
+ * It is taking care of full sentences with numbers 1 - 1000 to decimal places.
+ * If conditions are not met, the unchanged sentence is printed.
+
+ *
+ * @author L13-delta group
+ * @see TextTransform
+ * @see TextDecorator
  */
 
 public class TextNumbersToStringDecorator extends TextDecorator {
+    private static Logger logger = LoggerFactory.getLogger(TextNumbersToStringDecorator.class);
+    /**
+     * TextNumbersToStringDecorator constructor
+
+     * @param textTransform implements TextTransform to decorate
+     */
     public TextNumbersToStringDecorator(TextTransform textTransform) { super(textTransform); }
+    /**
+     * Hash Map to store all possible numbers combination with Polish translation
+     */
     private static final Map<Integer, String> NUMBERS_MAP = new HashMap<>();
+    /**
+     * *.csv file with combinantion of integer number - Polish translation to implement into Hash Map
+     */
     private static final String CSV_FILE_PATH = "/data/numbers.csv";
 
     static {
@@ -34,9 +66,9 @@ public class TextNumbersToStringDecorator extends TextDecorator {
     }
 
     /**
-     * Function to convert given @number into merged text with spaces
+     * Function to convert given number into merged text with spaces
      * @param number - number from given text converted into integer
-     * @return formatted number to string polish words with spaces
+     * @return formatted number to string Polish words with spaces
      */
 
     private static String convertNumberToWords(int number) {
@@ -57,8 +89,13 @@ public class TextNumbersToStringDecorator extends TextDecorator {
     }
 
     /**
+     * Override method apply()
+     * Function is taking string text and converting numbers to words
+     * with function @convertNumberToWords if possible.
+     * If not function will return string text.
+
      * @param text - text obtained from client
-     * @return formatted string from given text with number
+     * @return formatted string from given text with number if possible
      */
 
     @Override
@@ -94,6 +131,9 @@ public class TextNumbersToStringDecorator extends TextDecorator {
                 transformedText.append(word).append(" ");
             }
         }
-        return super.apply(transformedText.toString().trim());
+        String finalSentence = transformedText.toString().trim();
+        logger.debug(String.format("text: %s, converted: %s", text, finalSentence));
+        logger.info("Successfully converted!");
+        return super.apply(finalSentence);
     }
 }

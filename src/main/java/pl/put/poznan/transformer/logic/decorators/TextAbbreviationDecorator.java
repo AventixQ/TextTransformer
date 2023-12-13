@@ -1,3 +1,8 @@
+/**
+ * 2023-12-13
+ * L13-delta
+ */
+
 package pl.put.poznan.transformer.logic.decorators;
 
 import pl.put.poznan.transformer.logic.TextDecorator;
@@ -8,11 +13,20 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 /**
  * This is class for creating abbreviations in text.
  */
 
 public class TextAbbreviationDecorator extends TextDecorator {
+    private static Logger logger = LoggerFactory.getLogger(TextAbbreviationDecorator.class);
+    /**
+     * TextAbbreviationDecorator constructor
+
+     * @param textTransform implements TextTransform to decorate
+     */
     public TextAbbreviationDecorator(TextTransform textTransform) { super(textTransform); }
 
     private static final Map<String, String> ABBREVIATIONS_MAP = new HashMap<>();
@@ -31,7 +45,7 @@ public class TextAbbreviationDecorator extends TextDecorator {
 
     @Override
     public String apply(String text) {
-
+        String inputSentence = text;
         for (Map.Entry<String, String> entry : ABBREVIATIONS_MAP.entrySet()) {
             String wordToReplace = entry.getKey();
             String abbreviation = entry.getValue();
@@ -43,7 +57,8 @@ public class TextAbbreviationDecorator extends TextDecorator {
             // Perform case-insensitive replacement
             text = matcher.replaceAll(abbreviation);
         }
-
+        logger.debug(String.format("text: %s, abbreviated: %s", inputSentence, text));
+        logger.info("Successfully abbreviated!");
         return super.apply(text);
     }
 }
