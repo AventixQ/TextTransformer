@@ -1,3 +1,9 @@
-/Users/mochodek/Documents/Dydaktyka/Wyklady/IO/Laboratory classes/projekt/ioprojectarchitecture/src/main/java/pl/put/poznan/transformer/app/TextTransformerApplication.java
-/Users/mochodek/Documents/Dydaktyka/Wyklady/IO/Laboratory classes/projekt/ioprojectarchitecture/src/main/java/pl/put/poznan/transformer/logic/TextTransformer.java
-/Users/mochodek/Documents/Dydaktyka/Wyklady/IO/Laboratory classes/projekt/ioprojectarchitecture/src/main/java/pl/put/poznan/transformer/rest/TextTransformerController.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/rest/TextTransformerController.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/logic/decorators/TextExpandAbbreviationDecorator.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/app/TextTransformerApplication.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/logic/TextTransformer.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/logic/TextTransform.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/logic/decorators/TextRepetitionDecorator.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/logic/TextDecorator.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/logic/decorators/TextNumbersToStringDecorator.java
+/home/tamiza/git/ioprojectarchitecture/TextTransformer/src/main/java/pl/put/poznan/transformer/logic/decorators/TextAbbreviationDecorator.java
