@@ -16,10 +16,12 @@ import org.slf4j.Logger;
  */
 
 public class TextRepetitionDecorator extends TextDecorator {
-    private static Logger logger = LoggerFactory.getLogger(TextRepetitionDecorator.class);
+    /**
+     * Logger (SL4J library) for displaying messages on console.
+     */
+    final private static Logger logger = LoggerFactory.getLogger(TextRepetitionDecorator.class);
     /**
      * TextRepetitionDecorator constructor
-
      * @param textTransform implements TextTransform to decorate
      */
     public TextRepetitionDecorator(TextTransform textTransform) { super(textTransform); }
@@ -31,22 +33,16 @@ public class TextRepetitionDecorator extends TextDecorator {
 
     @Override
     public String apply(String text) {
-        // Split the text into an array of lines
         String[] lines = text.split("\\n");
 
-        // Process each line separately and store the results
         StringBuilder resultBuilder = new StringBuilder();
         for (String line : lines) {
-            // Split the line into words
             String[] words = line.split("\\s+");
 
-            // Iterate through the words and remove consecutive repetitions
             StringBuilder lineResultBuilder = new StringBuilder();
             String previousWord = null;
             for (String currentWord : words) {
-                // Ignore leading or trailing spaces
                 if (!currentWord.trim().isEmpty()) {
-                    // Remove repetitions
                     if (!currentWord.equalsIgnoreCase(previousWord)) {
                         lineResultBuilder.append(currentWord).append(" ");
                     }
@@ -54,14 +50,10 @@ public class TextRepetitionDecorator extends TextDecorator {
                 }
             }
 
-            // Trim leading and trailing spaces for the line
             String lineResult = lineResultBuilder.toString().trim();
 
-            // Append the processed line to the result
             resultBuilder.append(lineResult).append("\n");
         }
-
-        // Trim the trailing newline and apply transformations from the underlying decorator
         String trimedResult = resultBuilder.toString().trim();
 
         logger.debug(String.format("text: %s, repetition removed: %s", text, trimedResult));
