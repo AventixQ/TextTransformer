@@ -5,12 +5,16 @@
 
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import pl.put.poznan.transformer.logic.decorators.TextExpandAbbreviationDecorator;
+
 /**
  * Klasa Uppercase jest dekoratorem, który dodaje funkcjonalność zamiany wszystkich liter tekstu na duże litery.
  * Dziedziczy ona po klasie TextDecorator i implementuje interfejs TextTransform.
  */
 public class Uppercase extends TextDecorator {
-
+    private static Logger logger = LoggerFactory.getLogger(Uppercase.class);
     /**
      * Konstruktor klasy Uppercase.
      *
@@ -29,6 +33,8 @@ public class Uppercase extends TextDecorator {
     @Override
     public String apply(String text) {
         String transformedText = super.apply(text);
+        logger.debug(String.format("text: %s, uppercase: %s",text, transformedText.toUpperCase()));
+        logger.info("Successfully converted to uppercase!");
         return transformedText.toUpperCase();
     }
 }
