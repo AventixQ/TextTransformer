@@ -2,13 +2,9 @@ package pl.put.poznan.transformer.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.transformer.logic.decorators.TextAbbreviationDecorator;
+import pl.put.poznan.transformer.logic.decorators.*;
 import pl.put.poznan.transformer.logic.TextDecorator;
 import pl.put.poznan.transformer.logic.TextTransformer;
-import pl.put.poznan.transformer.logic.decorators.TextInverseDecorator;
-import pl.put.poznan.transformer.logic.decorators.TextRepetitionDecorator;
-import pl.put.poznan.transformer.logic.decorators.TextNumbersToStringDecorator;
-import pl.put.poznan.transformer.logic.decorators.TextExpandAbbreviationDecorator;
 
 
 @RestController
@@ -81,7 +77,26 @@ public class TextTransformerController {
         TextDecorator transformer = new TextInverseDecorator(new TextTransformer());
         return transformer.apply(transforms);
     }
+    //Dla zmiany na duze litery
+    @RequestMapping(method = RequestMethod.POST, path = "/uppercase", produces = "application/json")
+    public String uppercase(@RequestBody String transforms) {
+        TextDecorator transformer = new TextUpperCaseDecorator(new TextTransformer());
+        return transformer.apply(transforms);
+    }
 
+    //Dla zamiany na małe litery
+    @RequestMapping(method = RequestMethod.POST, path = "/lowercase", produces = "application/json")
+    public String lowercase(@RequestBody String transforms) {
+        TextDecorator transformer = new TextLowerCaseDecorator(new TextTransformer());
+        return transformer.apply(transforms);
+    }
+
+    //Dla kapitalizacji
+    @RequestMapping(method = RequestMethod.POST, path = "/capitalize", produces = "application/json")
+    public String capitalize(@RequestBody String transforms) {
+        TextDecorator transformer = new TextCapitalizeDecorator(new TextTransformer());
+        return transformer.apply(transforms);
+    }
 }
 
 
