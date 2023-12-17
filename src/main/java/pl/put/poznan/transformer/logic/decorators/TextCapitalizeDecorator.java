@@ -11,25 +11,26 @@ import pl.put.poznan.transformer.logic.TextDecorator;
 import pl.put.poznan.transformer.logic.TextTransform;
 
 /**
- * Klasa Capitalize jest dekoratorem, który dodaje funkcjonalność zmiany pierwszej litery tekstu na dużą, a resztę na małe litery.
- * Dziedziczy ona po klasie TextDecorator i implementuje interfejs TextTransform.
+ * The Capitalize class is a decorator that adds the functionality of changing the first letter of the text to uppercase, and the rest to lowercase.
+ * It inherits from the TextDecorator class and implements the TextTransform interface.
  */
 public class TextCapitalizeDecorator extends TextDecorator {
     private static Logger logger = LoggerFactory.getLogger(TextCapitalizeDecorator.class);
+
     /**
-     * Konstruktor klasy Capitalize.
+     * Constructor of the Capitalize class.
      *
-     * @param textTransform Obiekt implementujący interfejs TextTransform, który ma zostać udekorowany.
+     * @param textTransform An object implementing the TextTransform interface to be decorated.
      */
     public TextCapitalizeDecorator(TextTransform textTransform) {
         super(textTransform);
     }
 
     /**
-     * Zastosowuje transformację do tekstu, zmieniając pierwszą literę na dużą, a resztę na małe litery.
+     * Applies the transformation to the text, changing the first letter to uppercase and the rest to lowercase.
      *
-     * @param text Tekst, do którego ma zostać zastosowana transformacja.
-     * @return Przekształcony tekst.
+     * @param text The text to which the transformation should be applied.
+     * @return The transformed text.
      */
     @Override
     public String apply(String text) {
@@ -39,8 +40,8 @@ public class TextCapitalizeDecorator extends TextDecorator {
             transformedText = transformedText.substring(0, 1).toUpperCase() + transformedText.substring(1).toLowerCase();
         }
 
-        logger.debug(String.format("text: %s, capitalized: %s",text, transformedText));
-        logger.info("Successfully capitlized!");
+        logger.debug(String.format("text: %s, capitalized: %s", text, transformedText));
+        logger.info("Successfully capitalized!");
         return transformedText;
     }
 }

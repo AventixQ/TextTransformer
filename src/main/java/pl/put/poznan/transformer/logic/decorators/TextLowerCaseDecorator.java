@@ -11,31 +11,32 @@ import pl.put.poznan.transformer.logic.TextDecorator;
 import pl.put.poznan.transformer.logic.TextTransform;
 
 /**
- * Klasa Lowercase jest dekoratorem, który dodaje funkcjonalność zamiany wszystkich liter tekstu na małe litery.
- * Dziedziczy ona po klasie TextDecorator i implementuje interfejs TextTransform.
+ * The Lowercase class is a decorator that adds the functionality of converting all letters in the text to lowercase.
+ * It inherits from the TextDecorator class and implements the TextTransform interface.
  */
 public class TextLowerCaseDecorator extends TextDecorator {
     private static Logger logger = LoggerFactory.getLogger(TextLowerCaseDecorator.class);
+
     /**
-     * Konstruktor klasy Lowercase.
+     * Constructor of the Lowercase class.
      *
-     * @param textTransform Obiekt implementujący interfejs TextTransform, który ma zostać udekorowany.
+     * @param textTransform An object implementing the TextTransform interface to be decorated.
      */
     public TextLowerCaseDecorator(TextTransform textTransform) {
         super(textTransform);
     }
 
     /**
-     * Zastosowuje transformację do tekstu, zamieniając wszystkie litery na małe.
+     * Applies the transformation to the text, converting all letters to lowercase.
      *
-     * @param text Tekst, do którego ma zostać zastosowana transformacja.
-     * @return Przekształcony tekst.
+     * @param text The text to which the transformation should be applied.
+     * @return The transformed text.
      */
     @Override
     public String apply(String text) {
         String transformedText = super.apply(text);
 
-        logger.debug(String.format("text: %s, lowercase: %s",text, transformedText.toLowerCase()));
+        logger.debug(String.format("text: %s, lowercase: %s", text, transformedText.toLowerCase()));
         logger.info("Successfully converted to lowercase!");
         return transformedText.toLowerCase();
     }

@@ -11,30 +11,31 @@ import pl.put.poznan.transformer.logic.TextDecorator;
 import pl.put.poznan.transformer.logic.TextTransform;
 
 /**
- * Klasa Uppercase jest dekoratorem, który dodaje funkcjonalność zamiany wszystkich liter tekstu na duże litery.
- * Dziedziczy ona po klasie TextDecorator i implementuje interfejs TextTransform.
+ * The Uppercase class is a decorator that adds the functionality of converting all letters in the text to uppercase.
+ * It inherits from the TextDecorator class and implements the TextTransform interface.
  */
 public class TextUpperCaseDecorator extends TextDecorator {
     private static Logger logger = LoggerFactory.getLogger(TextUpperCaseDecorator.class);
+
     /**
-     * Konstruktor klasy Uppercase.
+     * Constructor of the Uppercase class.
      *
-     * @param textTransform Obiekt implementujący interfejs TextTransform, który ma zostać udekorowany.
+     * @param textTransform An object implementing the TextTransform interface to be decorated.
      */
     public TextUpperCaseDecorator(TextTransform textTransform) {
         super(textTransform);
     }
 
     /**
-     * Zastosowuje transformację do tekstu, zamieniając wszystkie litery na duże.
+     * Applies the transformation to the text, converting all letters to uppercase.
      *
-     * @param text Tekst, do którego ma zostać zastosowana transformacja.
-     * @return Przekształcony tekst.
+     * @param text The text to which the transformation should be applied.
+     * @return The transformed text.
      */
     @Override
     public String apply(String text) {
         String transformedText = super.apply(text);
-        logger.debug(String.format("text: %s, uppercase: %s",text, transformedText.toUpperCase()));
+        logger.debug(String.format("text: %s, uppercase: %s", text, transformedText.toUpperCase()));
         logger.info("Successfully converted to uppercase!");
         return transformedText.toUpperCase();
     }
